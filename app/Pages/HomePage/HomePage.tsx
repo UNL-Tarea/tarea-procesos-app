@@ -28,6 +28,7 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card';
+import TaskForm from '@/app/components/TaskForm/TaskForm';
 
 export default function HomePage() {
   return (
@@ -35,52 +36,8 @@ export default function HomePage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Gestor de tareas</h1>
       </div>
-      <div className="bg-card p-6 rounded-lg shadow-md mb-8">
-        <h2 className="text-xl font-bold mb-4">Crear una tarea</h2>
-        <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="title">Título</Label>
-            <Input id="title" placeholder="Ingresa un titulo" />
-          </div>
-          <div>
-            <Label htmlFor="description">Descripción</Label>
-            <Textarea id="description" placeholder="Ingresa una descripción" />
-          </div>
-          <div>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Selecciona una opcion" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="incomplete">Incompleta</SelectItem>
-                <SelectItem value="complete">Completado</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Label htmlFor="dueDate">Fecha</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start text-left font-normal"
-                >
-                  <CalendarDaysIcon className="mr-1 h-4 w-4 -translate-x-1" />
-                  Selecciona la fecha
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar mode="single" initialFocus />
-              </PopoverContent>
-            </Popover>
-          </div>
-          <div className="col-span-2">
-            <Button type="submit" className="w-full">
-              Crear tarea
-            </Button>
-          </div>
-        </form>
-      </div>
+
+      <TaskForm />
 
       <div>
         <h2 className="text-xl font-bold mb-4">Tareas</h2>
