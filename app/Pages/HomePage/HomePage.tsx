@@ -1,12 +1,17 @@
-'use server';
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
 
 import TaskForm from '@/app/components/TaskForm/TaskForm';
 // import TaskCard from '@/app/components/TaskCard/TaskCard';
 
 import { getTasks } from '@/lib/api';
 
-export default async function HomePage() {
-  const data = await getTasks();
+export default function HomePage() {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: async () => await getTasks(),
+  });
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
@@ -18,11 +23,14 @@ export default async function HomePage() {
 
       <div>
         <h2 className="text-xl font-bold mb-4">Tareas</h2>
-        {data ? (
-          <p>{JSON.stringify(data)}</p>
-        ) : (
+        {!data ? (
           <p className="text-center">No hay tareas pendientes</p>
+        ) : (
+          <p>{JSON.stringify(data)}</p>
         )}
+        {isLoading && <p className="text-center">Cargando...</p>}
+        {isError && <p className="text-center">Lo siento, hubo un error</p>}
+
         {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <TaskCard
             title="Finish project proposal"

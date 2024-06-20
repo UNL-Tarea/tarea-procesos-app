@@ -1,8 +1,9 @@
 import { FormTask } from '@/types/form';
 
-export async function getTasks() {
+async function getData() {
   try {
     const res = await fetch('https://tarea-procesos-api.onrender.com/get', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded\r\n',
       },
@@ -18,6 +19,11 @@ export async function getTasks() {
   }
 }
 
+export async function getTasks() {
+  const data = await getData();
+  return data;
+}
+
 export async function postTasks(data: FormTask) {
   try {
     const res = await fetch('https://tarea-procesos-api.onrender.com/post', {
@@ -25,13 +31,7 @@ export async function postTasks(data: FormTask) {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded\r\n',
       },
-      body: JSON.stringify({
-        id: '1',
-        title: 'Tarea 1',
-        description: 'Descripción de la tarea 1',
-        status: 'incomplete',
-        dateTask: '2023-05-01',
-      }),
+      body: JSON.stringify(data),
     });
 
     if (!res.ok) {

@@ -3,6 +3,7 @@ import { Inter as FontSans } from 'next/font/google';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
+import { ReactQueryClientProvider } from './components/ReactQueryClientProvider/ReactQueryClientProvider';
 
 export const metadata: Metadata = {
   title: 'Gestor de tareas',
@@ -27,7 +28,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
       </body>
     </html>
   );
