@@ -1,7 +1,13 @@
-import TaskForm from '@/app/components/TaskForm/TaskForm';
-import TaskCard from '@/app/components/TaskCard/TaskCard';
+'use server';
 
-export default function HomePage() {
+import TaskForm from '@/app/components/TaskForm/TaskForm';
+// import TaskCard from '@/app/components/TaskCard/TaskCard';
+
+import { getTasks } from '@/lib/api';
+
+export default async function HomePage() {
+  const data = await getTasks();
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
@@ -12,7 +18,11 @@ export default function HomePage() {
 
       <div>
         <h2 className="text-xl font-bold mb-4">Tareas</h2>
-        <p className="text-center">No hay tareas pendientes</p>
+        {data ? (
+          <p>{JSON.stringify(data)}</p>
+        ) : (
+          <p className="text-center">No hay tareas pendientes</p>
+        )}
         {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <TaskCard
             title="Finish project proposal"

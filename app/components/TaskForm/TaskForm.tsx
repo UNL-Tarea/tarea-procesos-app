@@ -2,12 +2,14 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
+import { randomUUID } from 'crypto';
 
 import { Form } from '@/components/ui/form';
+import { FormTask } from '@/types/form';
 
 import TaskFormView from './TaskFormView';
 import { FormSchema, FormType } from './schema';
-import { FormTask } from '@/types/form';
+import { postTasks } from '@/lib/api';
 
 const TaskForm = () => {
   const form = useForm<FormType>({
@@ -23,6 +25,7 @@ const TaskForm = () => {
 
   function onSubmit(data: FormType) {
     const dataReceived: FormTask = {
+      id: randomUUID(),
       title: data.title,
       description: data.description,
       status: 'incomplete',
