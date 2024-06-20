@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import TaskForm from '../app/components/TaskForm/TaskFormView';
+import TaskCard from '../app/components/TaskCard/TaskCard';
 import '../app/globals.css';
 
-const meta: Meta<typeof TaskForm> = {
-  component: TaskForm,
-  title: 'Components/TaskForm',
+const meta: Meta<typeof TaskCard> = {
+  component: TaskCard,
+  title: 'Components/TaskCard',
   parameters: {
     layout: 'centered',
   },
@@ -12,7 +12,7 @@ const meta: Meta<typeof TaskForm> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof TaskForm>;
+type Story = StoryObj<typeof TaskCard>;
 
 export const Default: Story = {
   args: {},
